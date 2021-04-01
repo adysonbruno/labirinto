@@ -22,15 +22,48 @@ for(let i=0;i<map.length;i++){
     let wallBlocks = map[i].split("");
     for(let j=0;j<wallBlocks.length;j++){
         let wallBlock = document.createElement("div");
-        if(wallBlocks[j]==="S" || wallBlocks[j]==="F"){
-            wallBlock.id = wallBlocks[j];
-        }else if(wallBlocks[j]===" "){
-            wallBlock.className = "hidden";
+
+        if(wallBlocks[j]===" "){
+            wallBlock.className = "empty";
         }else{
             wallBlock.className = wallBlocks[j];
         }
+
+        wallBlock.id = i+"-"+j;
         row.appendChild(wallBlock);
     }
     document.body.appendChild(row);
 }
 
+let player = document.createElement("div");
+player.id = "player";
+let parent = document.getElementsByClassName("S");
+parent[0].appendChild(player)
+
+document.addEventListener('keydown', (event) => {
+    let playerPosition = player.parentElement.id;
+    let playerPositionArr = playerPosition.split("-");
+    let playerPositionRow = parseInt(playerPositionArr[0]);
+    let playerPositionColumn = parseInt(playerPositionArr[1]);
+    const keyName = event.key;
+
+    if(keyName==="ArrowUp"){
+        playerPositionRow -=1;
+    }else if(keyName==="ArrowDown"){
+        playerPositionRow +=1;
+    }else if(keyName==="ArrowLeft"){
+        playerPositionColumn-=1;
+    }else if(keyName==="ArrowRight"){
+        playerPositionColumn+=1;
+    }
+
+    let newParent = document.getElementById(`${playerPositionRow}-${playerPositionColumn}`)
+    if(newParent!==null){
+        if(newParent.className==="empty" || newParent.className==="S"){
+            newParent.appendChild(player)
+        }else if (newParent.className==="F" ){
+            newParent.appendChild(player)
+            alert("Você venceu!!!")
+        }
+    }
+})
