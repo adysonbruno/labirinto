@@ -28,8 +28,9 @@ for(let i=0;i<map.length;i++){
         }else{
             wallBlock.className = wallBlocks[j];
         }
+        wallBlock.dataset.row = `${i}`;
+        wallBlock.dataset.column = `${j}`;
 
-        wallBlock.id = i+"-"+j;
         row.appendChild(wallBlock);
     }
     document.body.appendChild(row);
@@ -41,10 +42,8 @@ let parent = document.getElementsByClassName("S");
 parent[0].appendChild(player)
 
 document.addEventListener('keydown', (event) => {
-    let playerPosition = player.parentElement.id;
-    let playerPositionArr = playerPosition.split("-");
-    let playerPositionRow = parseInt(playerPositionArr[0]);
-    let playerPositionColumn = parseInt(playerPositionArr[1]);
+    let playerPositionRow = parseInt(player.parentElement.dataset.row);
+    let playerPositionColumn = parseInt(player.parentElement.dataset.column);
     const keyName = event.key;
 
     if(keyName==="ArrowUp"){
@@ -56,12 +55,12 @@ document.addEventListener('keydown', (event) => {
     }else if(keyName==="ArrowRight"){
         playerPositionColumn+=1;
     }
+    let newParent = document.querySelector(`[data-row=\'${playerPositionRow}\'][data-column=\'${playerPositionColumn}\']`);
 
-    let newParent = document.getElementById(`${playerPositionRow}-${playerPositionColumn}`)
     if(newParent!==null){
         if(newParent.className==="empty" || newParent.className==="S"){
             newParent.appendChild(player)
-        }else if (newParent.className==="F" ){
+        }else if (newParent.className==="F"){
             newParent.appendChild(player)
             alert("Você venceu!!!")
         }
