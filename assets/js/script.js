@@ -50,6 +50,8 @@ let modal = document.getElementById("modal")
 modal.id = "modal";
 let h2Modal = document.getElementById("modal-h2")
 
+let buttonReset = document.getElementById("modal-reset");
+
 document.addEventListener('keydown', (event) => {
     let playerPositionRow = parseInt(player.parentElement.dataset.row);
     let playerPositionColumn = parseInt(player.parentElement.dataset.column);
@@ -59,8 +61,6 @@ document.addEventListener('keydown', (event) => {
 
     if (keyName === "ArrowUp") {
         playerPositionRow -= 1;
-        // animeImagem.setAttribute("style",
-        //     "background-image: url(/keyboard-events/assets/img/" + event.target.id + ".png");
         player.style.backgroundImage = "url('/labirinto/assets/img/playerUp.png')"
     } else if (keyName === "ArrowDown") {
         playerPositionRow += 1;
@@ -79,20 +79,17 @@ document.addEventListener('keydown', (event) => {
         if(newParent.classList[1] === "P"){
             newParent.classList.remove("P");
         }else if(newParent.classList[1] === "R"){
-            modal.id = "modal";
+            modal.className = "visible";
             h2Modal.innerText = "Para passar você precisa coletar todas as Pokeballs"
-            modal.appendChild(h2Modal);
-            document.body.appendChild(modal)
         }
 
         if (newParent.className === "empty" || newParent.className === "S") {
             newParent.appendChild(player);
         } else if (newParent.className === "F") {
             newParent.appendChild(player);
-            // alert("Você venceu!!!");
-            h2Modal.innerText = "Parabéns Você venceu!"
-            modal.appendChild(h2Modal);
-            document.body.appendChild(modal)
+            buttonReset.className = "visible";
+            modal.className = "visible";
+            h2Modal.innerText = "Parabéns Você venceu!";
         }
 
         if(numberOfPokeballs === 0 && numberOfTeamRocket>0){
@@ -114,9 +111,17 @@ document.addEventListener('keydown', (event) => {
 
 
 const form = document.getElementById("form");
-form.addEventListener("submit", showAnagrams);
-function showAnagrams (event) {
+form.addEventListener("submit", checkNotification);
+
+function checkNotification (event) {
     event.preventDefault();
-    modal.id = "";
-    console.log(event.target);
+    modal.className = "hidden";
+
+}
+
+form.addEventListener("reset", reset);
+function reset (event) {
+    event.preventDefault();
+    // modal.className = "hidden";
+    location.reload();
 }

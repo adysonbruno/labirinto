@@ -5,7 +5,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 95vh;
 }
 
 div.row{
@@ -14,15 +14,12 @@ div.row{
     margin: 0 auto;
     display: flex;
     background-color: #a29d7f;
-    /*background-image: url("../img/emptyBlock.png");*/
 }
 
 div.W{
     box-sizing: border-box;
    background-image: url("../img/wall.png");
-   /*background-image: url("../img/wallBlock.png");*/
     width: 50px;
-    /*background-color: #ad8d6a;*/
     height: 50px;
     border: 1px groove black;
 }
@@ -75,13 +72,25 @@ div#modal{
     text-align: center;
     border: ridge 17px #8a82a1;
     background-color: #fdfdfd;
+    z-index: 1;
 }
 
+.hidden{
+    display: none;
+}
+
+.visible{
+    display: inline-block;
+}
+
+#form{
+    margin-top: 20px;
+}
 #modal-h2{
     line-height: 60px;
 }
 
-#modal-button {
+button {
     font-family: 'Press Start 2P', cursive;
     margin: 20px;
     border: none;
@@ -92,12 +101,5 @@ div#modal{
     background-color: #AAB0B5;
     color: #ffffff;
     font-weight: bold;
+    position: relative;
 }
-
-
-
-/*div#teste{*/
-/*    width: 500px;*/
-/*    height: 500px;*/
-/*    background-image: url("../img/teste.gif");*/
-/*}*/
