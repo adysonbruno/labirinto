@@ -1,18 +1,18 @@
 const map = [
     "WWWWWWWWWWWWWWWWWWWWW",
-    "W   W     W     W W W",
+    "W   W     WP    W W W",
     "W W W WWW WWWWW W W W",
-    "W W W   W     W W   W",
+    "W WPW   W     W W   W",
     "W WWWWWWW W WWW W W W",
     "W         W     W W W",
-    "W WWW WWWWW WWWWW W W",
+    "W WWW WWWWW WWWWW WRW",
     "W W   W   W W     W W",
     "W WWWWW W W W WWW W F",
-    "S     W W W W W W WWW",
+    "S     W W W W WPW WWW",
     "WWWWW W W W W W W W W",
-    "W     W W W   W W W W",
+    "W       W W   W W W W",
     "W WWWWWWW WWWWW W W W",
-    "W       W       W   W",
+    "W      PW       W   W",
     "WWWWWWWWWWWWWWWWWWWWW",
 ];
 
@@ -24,8 +24,12 @@ for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < wallBlocks.length; j++) {
         let wallBlock = document.createElement("div");
 
-        if (wallBlocks[j] === " ") {
+        if(wallBlocks[j] === "P"){
+            wallBlock.classList.add("empty","P");
+        }else if(wallBlocks[j] === " ") {
             wallBlock.className = "empty";
+        }else if(wallBlocks[j] === "R"){
+            wallBlock.classList.add("empty","R");
         } else {
             wallBlock.className = wallBlocks[j];
         }
@@ -53,6 +57,8 @@ document.addEventListener('keydown', (event) => {
     let playerPositionRow = parseInt(player.parentElement.dataset.row);
     let playerPositionColumn = parseInt(player.parentElement.dataset.column);
     const keyName = event.key;
+    let numberOfPokeballs = document.getElementsByClassName("P").length;
+    let numberOfTeamRocket = document.getElementsByClassName("R").length;
 
     if (keyName === "ArrowUp") {
         playerPositionRow -= 1;
@@ -72,6 +78,11 @@ document.addEventListener('keydown', (event) => {
     let newParent = document.querySelector(`[data-row=\'${playerPositionRow}\'][data-column=\'${playerPositionColumn}\']`);
 
     if (newParent !== null) {
+
+        if(newParent.classList[1] === "P"){
+            newParent.classList.remove("P");
+        }
+
         if (newParent.className === "empty" || newParent.className === "S") {
             newParent.appendChild(player);
         } else if (newParent.className === "F") {
@@ -79,12 +90,17 @@ document.addEventListener('keydown', (event) => {
             // alert("Você venceu!!!");
             document.body.appendChild(modal)
         }
+
+        if(numberOfPokeballs === 0 && numberOfTeamRocket>0){
+            let teamRocket = document.getElementsByClassName("R");
+            teamRocket[0].classList.remove("R")
+        }
+
     }
 
     // if(newParent.className === "W"){
     //     count++;
     //     newParent.className = "empty";
-    //     player.style.width = 50 + count*50 + "px";
     //     newParent.appendChild(player);
     // }else if(newParent.className === "empty"){
     //     newParent.appendChild(player);
