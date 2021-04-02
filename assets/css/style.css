@@ -6,6 +6,9 @@ body{
     align-items: center;
     justify-content: center;
     height: 95vh;
+    background-image: url("../img/backDesert.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 div.row{
@@ -24,22 +27,7 @@ div.W{
     border: 1px groove black;
 }
 
-div.empty {
-    width: 50px;
-    height: 50px;
-    z-index: 0;
-}
-
-div.P{
-    background: url("../img/pokeball.gif");
-    background-size: contain;
-}
-
-div.R{
-    background-image: url("../img/teamRocket.png");
-}
-
-div.S, div.F{
+div.empty,div.S, div.F {
     width: 50px;
     height: 50px;
     z-index: 0;
@@ -58,6 +46,15 @@ div#player{
     width: 50px;
     height: 50px;
     z-index: 1;
+}
+
+div.Pokeball{
+    background: url("../img/pokeball.gif");
+    background-size: contain;
+}
+
+div.Rocket{
+    background-image: url("../img/teamRocket.png");
 }
 
 div#modal{

@@ -25,11 +25,11 @@ for (let i = 0; i < map.length; i++) {
         let wallBlock = document.createElement("div");
 
         if(wallBlocks[j] === "P"){
-            wallBlock.classList.add("empty","P");
+            wallBlock.classList.add("empty","Pokeball");
         }else if(wallBlocks[j] === " ") {
             wallBlock.className = "empty";
         }else if(wallBlocks[j] === "R"){
-            wallBlock.classList.add("empty","R");
+            wallBlock.classList.add("empty","Rocket");
         } else {
             wallBlock.className = wallBlocks[j];
         }
@@ -43,11 +43,13 @@ for (let i = 0; i < map.length; i++) {
 
 let player = document.createElement("div");
 player.id = "player";
+
 let parent = document.getElementsByClassName("S");
 parent[0].appendChild(player)
 
 let modal = document.getElementById("modal")
 modal.id = "modal";
+
 let h2Modal = document.getElementById("modal-h2")
 
 let buttonReset = document.getElementById("modal-reset");
@@ -55,9 +57,11 @@ let buttonReset = document.getElementById("modal-reset");
 document.addEventListener('keydown', (event) => {
     let playerPositionRow = parseInt(player.parentElement.dataset.row);
     let playerPositionColumn = parseInt(player.parentElement.dataset.column);
+
     const keyName = event.key;
-    let numberOfPokeballs = document.getElementsByClassName("P").length;
-    let numberOfTeamRocket = document.getElementsByClassName("R").length;
+
+    let numberOfPokeballs = document.getElementsByClassName("Pokeball").length;
+    let numberOfTeamRocket = document.getElementsByClassName("Rocket").length;
 
     if (keyName === "ArrowUp") {
         playerPositionRow -= 1;
@@ -72,13 +76,13 @@ document.addEventListener('keydown', (event) => {
         playerPositionColumn += 1;
         player.style.backgroundImage = "url('/labirinto/assets/img/playerRight.png')"
     }
+
     let newParent = document.querySelector(`[data-row=\'${playerPositionRow}\'][data-column=\'${playerPositionColumn}\']`);
 
     if (newParent !== null) {
-
-        if(newParent.classList[1] === "P"){
-            newParent.classList.remove("P");
-        }else if(newParent.classList[1] === "R"){
+        if(newParent.classList[1] === "Pokeball"){
+            newParent.classList.remove("Pokeball");
+        }else if(newParent.classList[1] === "Rocket"){
             modal.className = "visible";
             h2Modal.innerText = "Para passar você precisa coletar todas as Pokeballs"
         }
@@ -93,26 +97,15 @@ document.addEventListener('keydown', (event) => {
         }
 
         if(numberOfPokeballs === 0 && numberOfTeamRocket>0){
-            let teamRocket = document.getElementsByClassName("R");
-            teamRocket[0].classList.remove("R")
+            let teamRocket = document.getElementsByClassName("Rocket");
+            teamRocket[0].classList.remove("Rocket")
         }
-
     }
-
-    // if(newParent.className === "W"){
-    //     count++;
-    //     newParent.className = "empty";
-    //     newParent.appendChild(player);
-    // }else if(newParent.className === "empty"){
-    //     newParent.appendChild(player);
-    // }
-
 })
 
-
 const form = document.getElementById("form");
-form.addEventListener("submit", checkNotification);
 
+form.addEventListener("submit", checkNotification);
 function checkNotification (event) {
     event.preventDefault();
     modal.className = "hidden";
@@ -122,6 +115,5 @@ function checkNotification (event) {
 form.addEventListener("reset", reset);
 function reset (event) {
     event.preventDefault();
-    // modal.className = "hidden";
     location.reload();
 }
