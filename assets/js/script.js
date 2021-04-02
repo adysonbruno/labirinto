@@ -16,16 +16,17 @@ const map = [
     "WWWWWWWWWWWWWWWWWWWWW",
 ];
 
-for(let i=0;i<map.length;i++){
+for (let i = 0; i < map.length; i++) {
     let row = document.createElement("div");
     row.className = "row";
+
     let wallBlocks = map[i].split("");
-    for(let j=0;j<wallBlocks.length;j++){
+    for (let j = 0; j < wallBlocks.length; j++) {
         let wallBlock = document.createElement("div");
 
-        if(wallBlocks[j]===" "){
+        if (wallBlocks[j] === " ") {
             wallBlock.className = "empty";
-        }else{
+        } else {
             wallBlock.className = wallBlocks[j];
         }
         wallBlock.dataset.row = `${i}`;
@@ -41,28 +42,47 @@ player.id = "player";
 let parent = document.getElementsByClassName("S");
 parent[0].appendChild(player)
 
+let modal = document.createElement("div")
+modal.id = "modal";
+let h2Modal = document.createElement("h2");
+h2Modal.innerText = "Parabéns Você venceu!"
+modal.appendChild(h2Modal);
+let count = 0;
+
 document.addEventListener('keydown', (event) => {
     let playerPositionRow = parseInt(player.parentElement.dataset.row);
     let playerPositionColumn = parseInt(player.parentElement.dataset.column);
     const keyName = event.key;
 
-    if(keyName==="ArrowUp"){
-        playerPositionRow -=1;
-    }else if(keyName==="ArrowDown"){
-        playerPositionRow +=1;
-    }else if(keyName==="ArrowLeft"){
-        playerPositionColumn-=1;
-    }else if(keyName==="ArrowRight"){
-        playerPositionColumn+=1;
+    if (keyName === "ArrowUp") {
+        playerPositionRow -= 1;
+    } else if (keyName === "ArrowDown") {
+        playerPositionRow += 1;
+    } else if (keyName === "ArrowLeft") {
+        playerPositionColumn -= 1;
+    } else if (keyName === "ArrowRight") {
+        playerPositionColumn += 1;
     }
     let newParent = document.querySelector(`[data-row=\'${playerPositionRow}\'][data-column=\'${playerPositionColumn}\']`);
 
-    if(newParent!==null){
-        if(newParent.className==="empty" || newParent.className==="S"){
-            newParent.appendChild(player)
-        }else if (newParent.className==="F"){
-            newParent.appendChild(player)
-            alert("Você venceu!!!")
+    if (newParent !== null) {
+        if (newParent.className === "empty" || newParent.className === "S") {
+            newParent.appendChild(player);
+        } else if (newParent.className === "F") {
+            newParent.appendChild(player);
+            // alert("Você venceu!!!");
+            document.body.appendChild(modal)
         }
     }
+
+    // if(newParent.className === "W"){
+    //     count++;
+    //     newParent.className = "empty";
+    //     player.style.width = 50 + count*50 + "px";
+    //     newParent.appendChild(player);
+    // }else if(newParent.className === "empty"){
+    //     newParent.appendChild(player);
+    // }
+
 })
+

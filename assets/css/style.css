@@ -33,3 +33,15 @@ div#player{
     height: 50px;
     z-index: 1;
 }
+
+div#modal{
+    width: 1050px;
+    height: 800px;
+    background-color: black;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    top: 8px;
+    color:white;
+    text-align: center;
+}
