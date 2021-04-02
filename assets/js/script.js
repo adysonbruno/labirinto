@@ -56,12 +56,18 @@ document.addEventListener('keydown', (event) => {
 
     if (keyName === "ArrowUp") {
         playerPositionRow -= 1;
+        // animeImagem.setAttribute("style",
+        //     "background-image: url(/keyboard-events/assets/img/" + event.target.id + ".png");
+        player.style.backgroundImage = "url('/labirinto/assets/img/playerUp.png')"
     } else if (keyName === "ArrowDown") {
         playerPositionRow += 1;
+        player.style.backgroundImage = "url('/labirinto/assets/img/playerDown.png')"
     } else if (keyName === "ArrowLeft") {
         playerPositionColumn -= 1;
+        player.style.backgroundImage = "url('/labirinto/assets/img/playerLeft.png')"
     } else if (keyName === "ArrowRight") {
         playerPositionColumn += 1;
+        player.style.backgroundImage = "url('/labirinto/assets/img/playerRight.png')"
     }
     let newParent = document.querySelector(`[data-row=\'${playerPositionRow}\'][data-column=\'${playerPositionColumn}\']`);
 
