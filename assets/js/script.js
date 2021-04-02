@@ -46,12 +46,9 @@ player.id = "player";
 let parent = document.getElementsByClassName("S");
 parent[0].appendChild(player)
 
-let modal = document.createElement("div")
+let modal = document.getElementById("modal")
 modal.id = "modal";
-let h2Modal = document.createElement("h2");
-h2Modal.innerText = "Parabéns Você venceu!"
-modal.appendChild(h2Modal);
-let count = 0;
+let h2Modal = document.getElementById("modal-h2")
 
 document.addEventListener('keydown', (event) => {
     let playerPositionRow = parseInt(player.parentElement.dataset.row);
@@ -81,6 +78,11 @@ document.addEventListener('keydown', (event) => {
 
         if(newParent.classList[1] === "P"){
             newParent.classList.remove("P");
+        }else if(newParent.classList[1] === "R"){
+            modal.id = "modal";
+            h2Modal.innerText = "Para passar você precisa coletar todas as Pokeballs"
+            modal.appendChild(h2Modal);
+            document.body.appendChild(modal)
         }
 
         if (newParent.className === "empty" || newParent.className === "S") {
@@ -88,6 +90,8 @@ document.addEventListener('keydown', (event) => {
         } else if (newParent.className === "F") {
             newParent.appendChild(player);
             // alert("Você venceu!!!");
+            h2Modal.innerText = "Parabéns Você venceu!"
+            modal.appendChild(h2Modal);
             document.body.appendChild(modal)
         }
 
@@ -108,3 +112,11 @@ document.addEventListener('keydown', (event) => {
 
 })
 
+
+const form = document.getElementById("form");
+form.addEventListener("submit", showAnagrams);
+function showAnagrams (event) {
+    event.preventDefault();
+    modal.id = "";
+    console.log(event.target);
+}
