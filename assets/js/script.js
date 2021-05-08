@@ -65,16 +65,16 @@ document.addEventListener('keydown', (event) => {
 
     if (keyName === "ArrowUp") {
         playerPositionRow -= 1;
-        player.style.backgroundImage = "url('/labirinto/assets/img/playerUp.png')"
+        player.style.backgroundImage = "url('./assets/img/playerUp.png')"
     } else if (keyName === "ArrowDown") {
         playerPositionRow += 1;
-        player.style.backgroundImage = "url('/labirinto/assets/img/playerDown.png')"
+        player.style.backgroundImage = "url('./assets/img/playerDown.png')"
     } else if (keyName === "ArrowLeft") {
         playerPositionColumn -= 1;
-        player.style.backgroundImage = "url('/labirinto/assets/img/playerLeft.png')"
+        player.style.backgroundImage = "url('./assets/img/playerLeft.png')"
     } else if (keyName === "ArrowRight") {
         playerPositionColumn += 1;
-        player.style.backgroundImage = "url('/labirinto/assets/img/playerRight.png')"
+        player.style.backgroundImage = "url('./assets/img/playerRight.png')"
     }
 
     let newParent = document.querySelector(`[data-row=\'${playerPositionRow}\'][data-column=\'${playerPositionColumn}\']`);
